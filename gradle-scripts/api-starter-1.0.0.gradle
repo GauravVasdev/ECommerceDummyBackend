@@ -1,0 +1,28 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath("io.franzbecker:gradle-lombok:${lombokVersion}")
+  }
+}
+
+
+
+apply plugin: 'java-library'
+apply plugin: io.franzbecker.gradle.lombok.LombokPlugin // id: 'io.franzbecker.gradle-lombok'
+
+lombok {
+  version = "1.18.22"
+  sha256 = "49381508ecb02b3c173368436ef71b24c0d4418ad260e6cc98becbcf4b345406"
+}
+
+
+
+dependencies {
+//  implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+
+}

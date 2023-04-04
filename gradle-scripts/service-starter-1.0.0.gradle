@@ -1,0 +1,57 @@
+buildscript {
+  ext {
+    serviceName = "${project.name}"
+    servicePackageName = project.name.toLowerCase().replace('-', '')
+  }
+  repositories {
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+  }
+}
+
+project(":${serviceName}:${serviceName}-domain") {
+  apply from: '../../../gradle-scripts/domain-starter-1.0.0.gradle'
+  dependencies {
+  }
+}
+
+project(":${serviceName}:${serviceName}-data") {
+  apply from: '../../../gradle-scripts/data-starter-1.0.0.gradle'
+  dependencies {
+    implementation(project(":${serviceName}:${serviceName}-domain"))
+  }
+}
+
+
+project(":${serviceName}:${serviceName}-app") {
+  apply from: '../../../gradle-scripts/app-starter-1.0.0.gradle'
+  dependencies {
+    implementation(project(":${serviceName}:${serviceName}-domain"))
+    implementation(project(":${serviceName}:${serviceName}-data"))
+    implementation(project(":${serviceName}:${serviceName}-client"))
+    implementation(project(":${serviceName}:${serviceName}-api"))
+  }
+}
+
+project(":${serviceName}:${serviceName}-api") {
+  apply from: '../../../gradle-scripts/api-starter-1.0.0.gradle'
+}
+
+project(":${serviceName}:${serviceName}-client") {
+  apply from: '../../../gradle-scripts/client-starter-1.0.0.gradle'
+  dependencies {
+    implementation(project(":${serviceName}:${serviceName}-api"))
+  }
+}
+
+subprojects {
+  java {
+    toolchain {
+      languageVersion = JavaLanguageVersion.of(17)
+    }
+  }
+}
