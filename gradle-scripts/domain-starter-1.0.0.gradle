@@ -1,4 +1,5 @@
 apply plugin: 'java-library'
 
 dependencies {
+    implementation 'org.postgresql:postgresql:42.5.4'
 }
