@@ -2,6 +2,7 @@ package com.octa.userservice.mapper;
 
 import com.octa.userservice.model.User;
 import http.request.RegisterUserRequest;
+import http.response.ForgotPasswordResponse;
 import http.response.RegisterUserResponse;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -23,4 +24,6 @@ public interface UserMapper {
     }
 
     RegisterUserResponse fromUserToRegisterUserResponse(User savedUser);
+
+    ForgotPasswordResponse fromUserToForgotPasswordResponse(User savedUser);
 }

@@ -4,7 +4,9 @@ import com.octa.userservice.mapper.UserMapper;
 import com.octa.userservice.model.User;
 import com.octa.userservice.port.persistence.IUserRespository;
 import com.octa.userservice.service.IUserService;
+import http.request.ForgotPasswordRequest;
 import http.request.RegisterUserRequest;
+import http.response.ForgotPasswordResponse;
 import http.response.RegisterUserResponse;
 
 public class UserServiceImpl implements IUserService {
@@ -23,5 +25,18 @@ public class UserServiceImpl implements IUserService {
         User user = userMapper.fromRegisterUserRequestToUser(registerUserRequest);
         User savedUser = userRespository.save(user);
         return userMapper.fromUserToRegisterUserResponse(savedUser);
+    }
+
+    @Override
+    public ForgotPasswordResponse updateUser(ForgotPasswordRequest forgotPasswordRequest) {
+        User user = null;
+        if(forgotPasswordRequest.getUsername()!=null){
+            user = userRespository.findByUsername(forgotPasswordRequest.getUsername());
+        }else if(forgotPasswordRequest.getEmail()!=null){
+            user = userRespository.findByEmail(forgotPasswordRequest.getEmail());
+        }
+        user.setPassword(forgotPasswordRequest.getPassword());
+        User savedUser = userRespository.save(user);
+        return userMapper.fromUserToForgotPasswordResponse(savedUser);
     }
 }
