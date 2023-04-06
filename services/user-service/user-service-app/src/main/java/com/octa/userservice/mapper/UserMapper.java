@@ -3,12 +3,14 @@ package com.octa.userservice.mapper;
 import com.octa.userservice.model.User;
 import http.request.RegisterUserRequest;
 import http.response.ForgotPasswordResponse;
+import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
 import java.util.UUID;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
@@ -28,4 +30,5 @@ public interface UserMapper {
     ForgotPasswordResponse fromUserToForgotPasswordResponse(User savedUser);
 
 
+    List<GetUserResponse> fromUserToGetAllUsersResponse(List<User> all);
 }

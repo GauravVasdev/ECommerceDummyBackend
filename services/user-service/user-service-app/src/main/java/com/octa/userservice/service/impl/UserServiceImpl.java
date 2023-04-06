@@ -7,7 +7,10 @@ import com.octa.userservice.service.IUserService;
 import http.request.ForgotPasswordRequest;
 import http.request.RegisterUserRequest;
 import http.response.ForgotPasswordResponse;
+import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
+
+import java.util.List;
 
 public class UserServiceImpl implements IUserService {
 
@@ -44,9 +47,16 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public String deleteUser(String uuid) {
-        User user = userRespository.findByUuid(uuid);
+        User user = userRespository.findByUserUuid(uuid);
         userRespository.deleteById(user.getId());
         return "user deleted";
+    }
+
+    @Override
+    public List<GetUserResponse> getAll(){
+        List<User> all = userRespository.getAll();
+        return userMapper.fromUserToGetAllUsersResponse(all);
+//        return abc(all)
     }
 
 }

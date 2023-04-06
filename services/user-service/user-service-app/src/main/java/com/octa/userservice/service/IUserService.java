@@ -1,9 +1,13 @@
 package com.octa.userservice.service;
 
+import com.octa.userservice.model.User;
 import http.request.ForgotPasswordRequest;
 import http.request.RegisterUserRequest;
 import http.response.ForgotPasswordResponse;
+import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
+
+import java.util.List;
 
 public interface IUserService {
 
@@ -13,5 +17,7 @@ public interface IUserService {
     ForgotPasswordResponse updateUser(ForgotPasswordRequest forgotPasswordRequest);
 
     String deleteUser(String uuid);
+
+    List<GetUserResponse> getAll();
 
 }

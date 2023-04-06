@@ -5,10 +5,13 @@ import constant.UserServiceConstant;
 import http.request.ForgotPasswordRequest;
 import http.request.RegisterUserRequest;
 import http.response.ForgotPasswordResponse;
+import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = UserServiceConstant.BASE_URL)
@@ -36,5 +39,11 @@ public class UserApiController {
     public ResponseEntity<String> deleteUser(@PathVariable String uuid){
         String s = userService.deleteUser(uuid);
         return new ResponseEntity<>(s, HttpStatus.OK);
+    }
+
+    @GetMapping(UserServiceConstant.GET_USER_URL)
+    public ResponseEntity<List<GetUserResponse>> getAll(){
+        var getUserResponse = userService.getAll();
+        return new ResponseEntity<>(getUserResponse, HttpStatus.OK);
     }
 }
