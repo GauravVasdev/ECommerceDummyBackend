@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IUserRespository extends JpaRepository<User,Long> {
-//
+
     User findByUsername(String username);
-//
+
     User findByEmail(String email);
 
-    User findByUserUuid(String uuid);
-
     List<User> getAll();
+    User findByUserUuid(String userUuid);
 }
