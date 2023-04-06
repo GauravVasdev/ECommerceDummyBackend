@@ -54,7 +54,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<GetUserResponse> getAll(){
-        List<User> all = userRespository.getAll();
+        List<User> all = userRespository.findAll();
         return userMapper.fromUserToGetAllUsersResponse(all);
 //        return abc(all)
     }
