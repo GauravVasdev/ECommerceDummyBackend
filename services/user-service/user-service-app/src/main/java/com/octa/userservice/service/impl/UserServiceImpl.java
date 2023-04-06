@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public String deleteUser(String uuid) {
-        User user = userRespository.findByUuid(uuid);
+        User user = userRespository.findByUserUuid(uuid);
         userRespository.deleteById(user.getId());
         return "user deleted";
     }

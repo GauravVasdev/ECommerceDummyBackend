@@ -4,10 +4,10 @@ import com.octa.userservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUserRespository extends JpaRepository<User,Long> {
-//
+
     User findByUsername(String username);
-//
+
     User findByEmail(String email);
 
-    User findByUuid(String uuid);
+    User findByUserUuid(String userUuid);
 }
