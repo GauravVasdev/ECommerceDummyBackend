@@ -8,11 +8,7 @@ import http.response.ForgotPasswordResponse;
 import http.response.RegisterUserResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = UserServiceConstant.BASE_URL)
@@ -33,6 +29,12 @@ public class UserApiController {
     @PutMapping(UserServiceConstant.UPDATE_USER_URL)
     public ResponseEntity<ForgotPasswordResponse> updateUser(@RequestBody ForgotPasswordRequest forgotPasswordRequest){
         ForgotPasswordResponse forgotPasswordResponse = userService.updateUser(forgotPasswordRequest);
-        return new ResponseEntity<>(forgotPasswordResponse, HttpStatus.OK);
+            return new ResponseEntity<>(forgotPasswordResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping(UserServiceConstant.DELETE_USER_URL)
+    public ResponseEntity<String> deleteUser(@PathVariable String uuid){
+        String s = userService.deleteUser(uuid);
+        return new ResponseEntity<>(s, HttpStatus.OK);
     }
 }

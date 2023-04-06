@@ -26,4 +26,6 @@ public interface UserMapper {
     RegisterUserResponse fromUserToRegisterUserResponse(User savedUser);
 
     ForgotPasswordResponse fromUserToForgotPasswordResponse(User savedUser);
+
+
 }

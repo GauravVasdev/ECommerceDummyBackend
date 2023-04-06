@@ -8,4 +8,6 @@ public class UserServiceConstant {
 
     public static final String UPDATE_BASE_URL ="/update";
     public static final String UPDATE_USER_URL = UPDATE_BASE_URL + "-user";
+    public static final String DELETE_BASE_URL ="/delete";
+    public static final String DELETE_USER_URL = DELETE_BASE_URL + "-user/{uuid}";
 }

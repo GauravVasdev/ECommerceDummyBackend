@@ -27,6 +27,8 @@ public class UserServiceImpl implements IUserService {
         return userMapper.fromUserToRegisterUserResponse(savedUser);
     }
 
+
+
     @Override
     public ForgotPasswordResponse updateUser(ForgotPasswordRequest forgotPasswordRequest) {
         User user = null;
@@ -39,4 +41,12 @@ public class UserServiceImpl implements IUserService {
         User savedUser = userRespository.save(user);
         return userMapper.fromUserToForgotPasswordResponse(savedUser);
     }
+
+    @Override
+    public String deleteUser(String uuid) {
+        User user = userRespository.findByUuid(uuid);
+        userRespository.deleteById(user.getId());
+        return "user deleted";
+    }
+
 }

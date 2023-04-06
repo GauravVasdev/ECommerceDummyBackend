@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     url: jdbc:postgresql://localhost:5432/octa_user_service_db
-    password: Klondike@1234
+    password: Hexa@12345
   jpa:
     properties:
       hibernate:

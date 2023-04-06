@@ -11,4 +11,7 @@ public interface IUserService {
     RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest);
 
     ForgotPasswordResponse updateUser(ForgotPasswordRequest forgotPasswordRequest);
+
+    String deleteUser(String uuid);
+
 }
