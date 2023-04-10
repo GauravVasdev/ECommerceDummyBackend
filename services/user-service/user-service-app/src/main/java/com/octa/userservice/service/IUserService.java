@@ -2,7 +2,9 @@ package com.octa.userservice.service;
 
 import com.octa.userservice.model.User;
 import http.request.ForgotPasswordRequest;
+import http.request.LoginRequest;
 import http.request.RegisterUserRequest;
+import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
@@ -20,4 +22,6 @@ public interface IUserService {
 
     List<GetUserResponse> getAll();
 
+
+    AuthenticationInfoResponse createAuthenticationToken(LoginRequest loginRequest);
 }

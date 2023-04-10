@@ -3,7 +3,9 @@ package com.octa.userservice.http.controller;
 import com.octa.userservice.service.IUserService;
 import constant.UserServiceConstant;
 import http.request.ForgotPasswordRequest;
+import http.request.LoginRequest;
 import http.request.RegisterUserRequest;
+import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
@@ -45,5 +47,12 @@ public class UserApiController {
     public ResponseEntity<List<GetUserResponse>> getAll(){
         var getUserResponse = userService.getAll();
         return new ResponseEntity<>(getUserResponse, HttpStatus.OK);
+    }
+
+
+    @PostMapping(UserServiceConstant.LOGIN_URL)
+    public ResponseEntity<AuthenticationInfoResponse> createAuthenticationToken(@RequestBody LoginRequest loginRequest){
+        AuthenticationInfoResponse authenticationInfoResponse = userService.createAuthenticationToken(loginRequest);
+        return new ResponseEntity<>(authenticationInfoResponse, HttpStatus.OK);
     }
 }

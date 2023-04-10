@@ -1,7 +1,9 @@
 package com.octa.userservice.mapper;
 
+import com.octa.userservice.model.AuthenticationInfo;
 import com.octa.userservice.model.User;
 import http.request.RegisterUserRequest;
+import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
@@ -31,4 +33,14 @@ public interface UserMapper {
 
 
     List<GetUserResponse> fromUserToGetAllUsersResponse(List<User> all);
+
+    AuthenticationInfoResponse fromAuthenticationInfoToAuthenticationInfoResponse(AuthenticationInfo authenticationInfo);
+
+    @AfterMapping
+    default void setValuefromAuthenticationInfoToAuthenticationInfoResponse(
+            AuthenticationInfo authenticationInfo,
+            @MappingTarget AuthenticationInfoResponse authenticationInfoResponse) {
+        authenticationInfoResponse.setTokenValue(
+                authenticationInfo.getToken() == null ? null : authenticationInfo.getToken().getToken());
+    }
 }

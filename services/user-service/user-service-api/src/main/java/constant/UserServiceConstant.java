@@ -12,4 +12,5 @@ public class UserServiceConstant {
     public static final String DELETE_USER_URL = DELETE_BASE_URL + "-user/{uuid}";
     public static final String GET_BASE_URL ="/get";
     public static final String GET_USER_URL = GET_BASE_URL + "-all-user";
+    public static final String LOGIN_URL = "/login";
 }
