@@ -3,7 +3,6 @@ package com.octa.userservice.config;
 import com.octa.userservice.mapper.UserMapper;
 import com.octa.userservice.port.persistence.ITokenRepository;
 import com.octa.userservice.port.persistence.IUserRepository;
-import com.octa.userservice.port.persistence.IUserRepository;
 import com.octa.userservice.service.IAuthenticateService;
 import com.octa.userservice.service.IAuthenticationService;
 import com.octa.userservice.service.ITokenService;
@@ -41,7 +40,7 @@ public class AppConfiguration{
     }
 
     @Bean
-    public IUserService userService(IUserRepository userRepository, UserMapper userMapper, ITokenService tokenService, IAuthenticationService authenticationService){
-        return new UserServiceImpl(userRepository,  userMapper, tokenService, authenticationService);
+    public IUserService userService(IUserRepository userRepository, UserMapper userMapper, ITokenService tokenService, IAuthenticationService authenticationService, JwtTokenUtil jwtTokenUtil){
+        return new UserServiceImpl(userRepository,  userMapper, tokenService, authenticationService, jwtTokenUtil);
     }
 }

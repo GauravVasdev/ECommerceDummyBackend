@@ -2,11 +2,13 @@ package com.octa.userservice.mapper;
 
 import com.octa.userservice.model.AuthenticationInfo;
 import com.octa.userservice.model.User;
+import com.octa.userservice.model.ValidateToken;
 import http.request.RegisterUserRequest;
 import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
+import http.response.ValidateTokenResponse;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -43,4 +45,6 @@ public interface UserMapper {
         authenticationInfoResponse.setTokenValue(
                 authenticationInfo.getToken() == null ? null : authenticationInfo.getToken().getToken());
     }
+
+    ValidateTokenResponse fromValidateTokenToValidateTokenResponse(ValidateToken validateToken);
 }

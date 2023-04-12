@@ -9,6 +9,7 @@ import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
+import http.response.ValidateTokenResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,17 @@ public class UserApiController {
     public ResponseEntity<AuthenticationInfoResponse> createAuthenticationToken(@RequestBody LoginRequest loginRequest){
         AuthenticationInfoResponse authenticationInfoResponse = userService.createAuthenticationToken(loginRequest);
         return new ResponseEntity<>(authenticationInfoResponse, HttpStatus.OK);
+    }
+
+    @PostMapping(value = UserServiceConstant.VALIDATE_TOKEN_URL)
+    public ResponseEntity<ValidateTokenResponse> validateJwt(@RequestParam("token") String token) {
+        ValidateTokenResponse response = userService.validateJwt(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/home")
+    public String home() {
+        System.out.println("I am in home");
+        return "Yes I am in home";
     }
 }

@@ -13,4 +13,6 @@ public class UserServiceConstant {
     public static final String GET_BASE_URL ="/get";
     public static final String GET_USER_URL = GET_BASE_URL + "-all-user";
     public static final String LOGIN_URL = "/login";
+
+    public static final String VALIDATE_TOKEN_URL = "/authenticate-token";
 }

@@ -16,12 +16,16 @@ buildscript {
 project(":${serviceName}:${serviceName}-domain") {
   apply from: '../../../gradle-scripts/domain-starter-1.0.0.gradle'
   dependencies {
+    implementation(project(":common"))
+    implementation(project(":common:common-data"))
   }
 }
 
 project(":${serviceName}:${serviceName}-data") {
   apply from: '../../../gradle-scripts/data-starter-1.0.0.gradle'
   dependencies {
+    implementation(project(":common"))
+    implementation(project(":common:common-data"))
     implementation(project(":${serviceName}:${serviceName}-domain"))
   }
 }
@@ -30,6 +34,8 @@ project(":${serviceName}:${serviceName}-data") {
 project(":${serviceName}:${serviceName}-app") {
   apply from: '../../../gradle-scripts/app-starter-1.0.0.gradle'
   dependencies {
+    implementation(project(":common"))
+    implementation(project(":common:common-data"))
     implementation(project(":${serviceName}:${serviceName}-domain"))
     implementation(project(":${serviceName}:${serviceName}-data"))
     implementation(project(":${serviceName}:${serviceName}-client"))
@@ -44,6 +50,8 @@ project(":${serviceName}:${serviceName}-api") {
 project(":${serviceName}:${serviceName}-client") {
   apply from: '../../../gradle-scripts/client-starter-1.0.0.gradle'
   dependencies {
+    implementation(project(":common"))
+    implementation(project(":common:common-data"))
     implementation(project(":${serviceName}:${serviceName}-api"))
   }
 }

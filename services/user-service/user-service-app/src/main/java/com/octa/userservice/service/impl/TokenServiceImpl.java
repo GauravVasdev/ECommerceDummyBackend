@@ -21,4 +21,9 @@ public class TokenServiceImpl implements ITokenService {
     public Token save(Token token) {
         return tokenRepository.save(token);
     }
+
+    @Override
+    public Token getByToken(String token) {
+        return tokenRepository.findByToken(token);
+    }
 }

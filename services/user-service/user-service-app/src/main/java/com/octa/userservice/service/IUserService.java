@@ -8,6 +8,7 @@ import http.response.AuthenticationInfoResponse;
 import http.response.ForgotPasswordResponse;
 import http.response.GetUserResponse;
 import http.response.RegisterUserResponse;
+import http.response.ValidateTokenResponse;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface IUserService {
 
 
     AuthenticationInfoResponse createAuthenticationToken(LoginRequest loginRequest);
+
+    ValidateTokenResponse validateJwt(String token);
 }

@@ -1,0 +1,32 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: edge-service
+  main:
+    allow-circular-references: true
+    web-application-type: reactive
+  cloud:
+    gateway:
+      -default-filters:
+        - name: AuthenticationFilter
+      routes:
+        - id: user-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/users/**
+
+
+urls:
+  unfiltered:
+    - "/users/login"
+  filtered:
+    - "/users/get"
+    -
+service:
+  user:
+    name: user-service
+    host: localhost
+    port: 8081
+    url: ${service.user.host}:${service.user.port}
