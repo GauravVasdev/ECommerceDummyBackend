@@ -16,14 +16,19 @@ spring:
           uri: http://localhost:8081/
           predicates:
             - Path=/users/**
+        - id: admin-service
+          uri: http://localhost:8100/
+          predicates:
+            - Path=/admin/**
 
 
 urls:
   unfiltered:
     - "/users/login"
+    - "users/"
+    - "admin/"
   filtered:
     - "/users/get"
-    -
 service:
   user:
     name: user-service
