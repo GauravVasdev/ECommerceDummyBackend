@@ -2,6 +2,7 @@ package com.octa.userservice.util;
 
 import com.octa.userservice.model.Token;
 import com.octa.userservice.model.User;
+import com.octa.userservice.port.persistence.IRoleRepository;
 import com.octa.userservice.port.persistence.IUserRepository;
 import constant.TokenConstants;
 import io.jsonwebtoken.Claims;
@@ -20,8 +21,11 @@ public class JwtTokenUtil {
 
     private final IUserRepository userRepository;
 
-    public JwtTokenUtil(IUserRepository userRepository) {
+    private final IRoleRepository roleRepository;
+
+    public JwtTokenUtil(IUserRepository userRepository, IRoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     /**
@@ -83,7 +87,8 @@ public class JwtTokenUtil {
      */
     public Token generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        String token = doGenerateToken(user.getEmail());
+        var roleName = roleRepository.findById(user.getRole().getId()).get().getRoleName();
+        String token = doGenerateToken(user.getEmail(), roleName);
         Token tokenObj=new Token();
         tokenObj.setToken(token);
         tokenObj.setType(TokenConstants.TOKEN_TYPE);
@@ -97,9 +102,10 @@ public class JwtTokenUtil {
      * @param subject this is internal method calling to generate token using secretkey
      * @return token
      */
-    private String doGenerateToken(String subject) {
+    private String doGenerateToken(String subject, String roleName) {
 
         return Jwts.builder()
+                .claim("Roles",roleName)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))

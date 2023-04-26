@@ -15,4 +15,7 @@ public class RegisterUserRequest {
     @JsonProperty("password")
     private String password;
 
+    @JsonProperty("role_name")
+    private String roleName;
+
 }

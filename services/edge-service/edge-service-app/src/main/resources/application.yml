@@ -11,6 +11,7 @@ spring:
     gateway:
       -default-filters:
         - name: AuthenticationFilter
+        - name: AuthorizationFilter
       routes:
         - id: user-service
           uri: http://localhost:8081/
@@ -25,8 +26,7 @@ spring:
 urls:
   unfiltered:
     - "/users/login"
-    - "users/"
-    - "admin/"
+    - "/users/create"
   filtered:
     - "/users/get"
 service:

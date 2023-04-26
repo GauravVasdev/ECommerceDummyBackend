@@ -2,15 +2,18 @@ package com.octa.userservice.service.impl;
 
 import com.octa.userservice.mapper.UserMapper;
 import com.octa.userservice.model.AuthenticationInfo;
+import com.octa.userservice.model.Role;
 import com.octa.userservice.model.Token;
 import com.octa.userservice.model.User;
 import com.octa.userservice.model.ValidateToken;
+import com.octa.userservice.port.persistence.IRoleRepository;
 import com.octa.userservice.port.persistence.IUserRepository;
 import com.octa.userservice.service.IAuthenticationService;
 import com.octa.userservice.service.ITokenService;
 import com.octa.userservice.service.IUserService;
 import com.octa.userservice.util.JwtTokenUtil;
 import constant.TokenConstants;
+import http.request.AuthorizationFormRequest;
 import http.request.ForgotPasswordRequest;
 import http.request.LoginRequest;
 import http.request.RegisterUserRequest;
@@ -21,11 +24,12 @@ import http.response.RegisterUserResponse;
 import http.response.ValidateTokenResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
+
+    private final IRoleRepository roleRepository;
 
     private final UserMapper userMapper;
 
@@ -35,8 +39,9 @@ public class UserServiceImpl implements IUserService {
 
     private final JwtTokenUtil jwtTokenUtil;
 
-    public UserServiceImpl(IUserRepository userRepository, UserMapper userMapper, ITokenService tokenService, IAuthenticationService authenticationService, JwtTokenUtil jwtTokenUtil) {
+    public UserServiceImpl(IUserRepository userRepository, IRoleRepository roleRepository, UserMapper userMapper, ITokenService tokenService, IAuthenticationService authenticationService, JwtTokenUtil jwtTokenUtil) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.userMapper = userMapper;
         this.tokenService = tokenService;
         this.authenticationService = authenticationService;
@@ -46,6 +51,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest) {
         User user = userMapper.fromRegisterUserRequestToUser(registerUserRequest);
+        String roleName=registerUserRequest.getRoleName();
+        Role role = roleRepository.findByRoleName(roleName).orElseThrow(() -> (new RuntimeException("role not found")));
+        user.setRole(role);
         User savedUser = userRepository.save(user);
         return userMapper.fromUserToRegisterUserResponse(savedUser);
     }
@@ -114,6 +122,11 @@ public class UserServiceImpl implements IUserService {
         ValidateTokenResponse validateTokenResponse =
                 userMapper.fromValidateTokenToValidateTokenResponse(validateToken);
         return validateTokenResponse;
+    }
+
+    @Override
+    public Boolean authorizeRole(AuthorizationFormRequest authorizationFormRequest) {
+        return authenticationService.authorizeRole(authorizationFormRequest);
     }
 
 }

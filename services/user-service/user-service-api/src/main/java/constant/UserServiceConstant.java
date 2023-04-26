@@ -15,4 +15,5 @@ public class UserServiceConstant {
     public static final String LOGIN_URL = "/login";
 
     public static final String VALIDATE_TOKEN_URL = "/authenticate-token";
+    public static final String VALIDATE_ROLE = "/authorize-role";
 }

@@ -1,6 +1,7 @@
 package com.octa.userservice.service;
 
 import com.octa.userservice.model.User;
+import http.request.AuthorizationFormRequest;
 import http.request.ForgotPasswordRequest;
 import http.request.LoginRequest;
 import http.request.RegisterUserRequest;
@@ -27,4 +28,6 @@ public interface IUserService {
     AuthenticationInfoResponse createAuthenticationToken(LoginRequest loginRequest);
 
     ValidateTokenResponse validateJwt(String token);
+
+    Boolean authorizeRole(AuthorizationFormRequest authorizationFormRequest);
 }

@@ -2,6 +2,7 @@ package com.octa.userservice.http.controller;
 
 import com.octa.userservice.service.IUserService;
 import constant.UserServiceConstant;
+import http.request.AuthorizationFormRequest;
 import http.request.ForgotPasswordRequest;
 import http.request.LoginRequest;
 import http.request.RegisterUserRequest;
@@ -62,6 +63,13 @@ public class UserApiController {
         ValidateTokenResponse response = userService.validateJwt(token);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping(value = UserServiceConstant.VALIDATE_ROLE)
+    private Boolean authorizationRole(
+            @RequestBody AuthorizationFormRequest authorizationFormRequest) {
+        return userService.authorizeRole(authorizationFormRequest);
+    }
+
 
     @PostMapping("/home")
     public String home() {
