@@ -16,3 +16,6 @@ VALUES(1,1),
 (3,1),
 (4,1),
 (5,1);
+
+Insert INTO users
+VALUES(1, 'gv@gmail.com','gv123',gen_random_uuid (), 'GauravVasdev',1);
