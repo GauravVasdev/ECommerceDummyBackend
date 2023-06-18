@@ -9,8 +9,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    url: jdbc:postgresql://localhost:5432/octa_user_service_db
-    password: Hexa@12345
+    url: jdbc:postgresql://mydatabase.cyzc7olnurqo.ap-south-1.rds.amazonaws.com:5432/octa_user_service_db?createDatabaseIfNotExist=true
+    password: myjavadb
   jpa:
     properties:
       hibernate:
