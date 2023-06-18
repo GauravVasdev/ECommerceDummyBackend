@@ -71,7 +71,7 @@ public class UserApiController {
     }
 
 
-    @PostMapping("/home")
+    @GetMapping("/home")
     public String home() {
         System.out.println("I am in home");
         return "Yes I am in home";
